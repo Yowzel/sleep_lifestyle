@@ -1,0 +1,55 @@
+/*
+c1 = personID, c2= Gender, c3 = Age, c4 = occupation
+c5 = Sleep Duration, c6= Quality of Sleep, c7=Physical Activity Lvl
+c8 = Stress Level, c9 = BMI , c10 = Blood Pressure, c11 = Heart Rate
+c12 = Daily Steps, c13 = Sleep Disorder
+*/
+
+/*
+SELECT * FROM sleep_health_lifestyle;
+
+ALTER TABLE Sleep_health_and_lifestyle_dataset RENAME TO sleep_lifestyle;
+*/
+/* SLEEP DURATION ANALYSIS */
+
+/* Finding the average sleep duration for male and female */
+-- = gender, c3 = age
+
+/*
+SELECT c2 ,ROUND(AVG(c3), 2) from sleep_lifestyle WHERE c2 = 'Male';
+SELECT c2, ROUND(AVG(c3), 2) from sleep_lifestyle WHERE c2 = 'Female';
+*/
+
+/* Relationship between age and sleep duration*/
+-- c5 = Sleep duration c3 = Age
+/*
+SELECT c3, ROUND(AVG(c5), 2) from sleep_lifestyle GROUP BY c3 ORDER BY c3
+*/
+
+/* Relationship between BMI and Sleep Duration */
+/*
+SELECT c9, ROUND(AVG(c5),2) AS avg_sleep_duration from sleep_lifestyle GROUP by c9 ORDER by c9;
+*/
+
+--Calculate the prevalence of each sleep disorder in the dataset
+/*
+SELECT c13, COUNT(*) AS total_count,
+	ROUND((COUNT(*) * 100.0) / (SELECT COUNT(*) FROM sleep_lifestyle), 2) AS prevalence_percentage
+	FROM
+    sleep_lifestyle
+	GROUP BY
+    c13;
+ */
+/* Finding the amount of sleep disorders for each occupation*/
+/*
+SELECT c4,
+	c13, COUNT(*) as disorder_count
+	FROM
+    sleep_lifestyle
+	GROUP BY
+    c4, c13
+    ORDER by
+    c4, c13
+    
+ */
+ 
